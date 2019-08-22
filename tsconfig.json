@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "lib": ["es7", "dom"],
+    "types": ["node"],
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "paths": {
+      "*": [
+        "node_modules/*",
+      ]
+    },
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
