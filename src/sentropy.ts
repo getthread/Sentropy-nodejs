@@ -11,17 +11,21 @@ export interface ClassificationRequestPayload {
   id?: string,
   text: string,
   author: string,
-  segment?: string
+  segment: string
+}
+
+export interface SentropyClientOpts {
+  headers?: {[key: string]: string}
 }
 
 export class SentropyClient implements ISentropyClient {
 
   constructor(
     private apiKey: string,
-    private headers?: {[key: string]: string}
+    private opts?: SentropyClientOpts
   ){}
 
-  _applyDefaultsToPayload(payload: ClassificationRequestPayload) {
+  private _applyDefaultsToPayload(payload: ClassificationRequestPayload) {
     return {
       id: uuidv4(),
       ...payload
@@ -30,11 +34,12 @@ export class SentropyClient implements ISentropyClient {
 
   async classify(payload: ClassificationRequestPayload): Promise<ClassificationResponsePayload> {
     const payloadWithDefaults = this._applyDefaultsToPayload(payload);
+    const headers = this.opts && this.opts.headers || {};
     const results = await got.post(SENTROPY_API_URL, {
       body: JSON.stringify(payloadWithDefaults),
       headers: {
         "User-Agent": "Thread/Sentropy Nodejs",
-        ...this.headers,
+        ... headers,
         "Authorization": `Bearer ${this.apiKey}`,
         "content-type": "application/json"
       }
@@ -47,7 +52,7 @@ export class SentropyClient implements ISentropyClient {
 export interface ClassificationResponsePayload {
   id: string,
   author: string,
-  segment?: string,
+  segment: string,
   label_probabilities: {
     IDENTITY_ATTACK: number,
     SEXUAL_AGGRESSION: number,
