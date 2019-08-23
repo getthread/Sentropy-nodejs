@@ -1,12 +1,10 @@
 import { SentropyClient } from "./sentropy";
-export * from './sentropy';
+import { SentropyClientOpts } from "./types";
+export * from "./types";
 
-function sentropy(
-  apiKey: string,
-  headers?: {[key: string]: string}
-): SentropyClient {
-  return new SentropyClient(apiKey, headers)
-};
+function sentropy(apiKey: string, opts: SentropyClientOpts = {}): SentropyClient {
+  return new SentropyClient(apiKey, opts);
+}
 
 export default sentropy;
 module.exports = sentropy;
