@@ -67,3 +67,31 @@ SentropyClient
   .then(classificationResult => console.log(classificationResult))
   .catch(err => console.error(err))
 ```
+
+You can also add custom headers.
+
+```js
+const sentropy = require("@cosmic_thread/sentropy-nodejs");
+const SentropyClient = sentropy(process.env.SENTROPY_API_KEY);
+
+const classificationRequestPayload = {
+  "text": "Only a liberal would think that",
+  "id": "4m8aw",
+  "author": "throwaway_123",
+  "segment": "breaking_news"
+};
+
+const opts = {
+  headers : {
+    "User-Agent": "My Custom/User Agent"
+  }
+}
+
+SentropyClient
+  .classify(
+    classificationRequestPayload,
+    opts
+  )
+  .then(classificationResult => console.log(classificationResult))
+  .catch(err => console.error(err))
+```
