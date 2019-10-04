@@ -9,7 +9,8 @@ import { ISentropyClient } from "./interfaces";
 import {
   SentropyClientOpts,
   ClassificationRequestPayload,
-  ClassificationResponsePayload
+  ClassificationResponsePayload,
+  ClassificationRequestOpts
 } from "./types";
 
 // Constants
@@ -25,8 +26,9 @@ export class SentropyClient implements ISentropyClient {
     };
   }
 
-  private _constructHeaders() {
-    const headers = (this.opts && this.opts.headers) || {};
+  private _constructHeaders(opts?: ClassificationRequestOpts) {
+    const options = opts || this.opts;
+    const headers = (options && options.headers) || {};
     return {
       "User-Agent": "Sentropy Nodejs",
       ...headers,
@@ -36,14 +38,15 @@ export class SentropyClient implements ISentropyClient {
   }
 
   async classify(
-    payload: ClassificationRequestPayload
+    payload: ClassificationRequestPayload,
+    opts?: ClassificationRequestOpts
   ): Promise<ClassificationResponsePayload> {
     const payloadWithDefaults = this._applyDefaultsToPayload(payload);
 
     return got
       .post(SENTROPY_API_URL, {
         body: JSON.stringify(payloadWithDefaults),
-        headers: this._constructHeaders()
+        headers: this._constructHeaders(opts)
       })
       .then(res => JSON.parse(res.body))
       .catch(err => {

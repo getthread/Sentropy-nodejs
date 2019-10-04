@@ -9,6 +9,10 @@ export type SentropyClientOpts = {
   headers?: { [key: string]: string };
 };
 
+export type ClassificationRequestOpts = {
+  headers?: { [key: string]: string };
+};
+
 export type ClassificationResponsePayload = {
   id: string;
   author: string;

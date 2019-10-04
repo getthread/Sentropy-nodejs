@@ -1,10 +1,12 @@
 import {
   ClassificationRequestPayload,
-  ClassificationResponsePayload
+  ClassificationResponsePayload,
+  ClassificationRequestOpts
 } from "./types";
 
 export interface ISentropyClient {
   classify: (
-    payload: ClassificationRequestPayload
+    payload: ClassificationRequestPayload,
+    opts?: ClassificationRequestOpts
   ) => Promise<ClassificationResponsePayload>;
 }
