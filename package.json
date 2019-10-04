@@ -1,6 +1,6 @@
 {
   "name": "@cosmic_thread/sentropy-nodejs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Sentropy NodeJS API Wrapper",
   "main": "dist/index.js",
   "scripts": {

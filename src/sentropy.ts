@@ -13,7 +13,7 @@ import {
 } from "./types";
 
 // Constants
-const SENTROPY_API_URL = "https://api.alpha.sentropy.io/";
+import { SENTROPY_API_URL } from './constants';
 
 export class SentropyClient implements ISentropyClient {
   constructor(private apiKey: string, private opts: SentropyClientOpts) {}
@@ -28,7 +28,7 @@ export class SentropyClient implements ISentropyClient {
   private _constructHeaders() {
     const headers = (this.opts && this.opts.headers) || {};
     return {
-      "User-Agent": "Thread/Sentropy Nodejs",
+      "User-Agent": "Sentropy Nodejs",
       ...headers,
       Authorization: `Bearer ${this.apiKey}`,
       "content-type": "application/json"
