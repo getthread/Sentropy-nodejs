@@ -19,7 +19,7 @@
   "homepage": "https://gitlab.com/cosmicac/sentropy-nodejs#readme",
   "dependencies": {
     "@types/node": "12.7.2",
-    "got": "9.6.0",
+    "got": "11.8.5",
     "typescript": "3.5.3",
     "uuid": "3.3.3"
   }
